@@ -2,7 +2,7 @@
 
 | Qué | Cuándo (hora PR) | Dónde corre | Estado |
 |---|---|---|---|
-| Agente de reviews de Google | 6:00am diario | Mac mini (launchd) · `agentes/reviews-google/` | Construido, falta instalar |
+| Agente de reviews de Google | 6:00am diario | Mac mini (launchd) · `agentes/reviews-google/` | ✅ Corriendo desde el 17 nov |
 | Reporte diario Oyster Shack | 7:32am diario | Tarea programada de Claude (aprobación automática) | ✅ Corriendo |
 | Ingesta nocturna de OpenClaw | 11:47pm diario | Tarea programada de Claude (aprobación automática) | ✅ Corriendo |
 

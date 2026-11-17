@@ -4,7 +4,7 @@ Orden recomendado: lo que ya está casi listo primero. No diseñar más jerarqu�
 
 ## 🔥 Esta semana
 - [x] **Agente de reviews probado en la MacBook Air** (17 nov): SerpApi, Claude y email funcionando.
-- [ ] **Agente de reviews en el Mac mini**: instalar (Homebrew, gh, clonar, venv, copiar `.env`), probar y cargar launchd. No activar launchd en la Air. Ver `agentes/reviews-google/README.md`.
+- [x] **Agente de reviews en el Mac mini** (17 nov): instalado, launchd cargado y probado (`launchctl start` → email enviado). Corre diario a las 6:00am.
 - [x] **Ejemplos reales de reviews**: `examples.md` armado con 96 respuestas publicadas (17 nov).
 - [ ] **Guía de voz**: se cortó en el Ejemplo 5; faltan ejemplos negativos y la sección 10. Resolver los [VERIFICAR] (canal de quejas, compensaciones, otros idiomas).
 - [ ] **Inventario v0.1**: confirmar con Joseph mínimo vs par, unidades por producto, códigos `DL` y `J`, y si se pide hasta el par o por caja.

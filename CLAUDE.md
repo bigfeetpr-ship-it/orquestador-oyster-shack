@@ -31,7 +31,7 @@ y hablas con Joseph. No ejecutas trabajo de especialista si hay un agente para e
 | `ventas-menu` | Reporte diario de Clover, tiers de ostras, menu engineering, Recipe Hub, limpieza de Clover | ✅ Reporte diario corriendo 7:32am |
 | `personal` | Training Hub, labor vs mesas, TipHaus, ADP, SOPs | Hub publicado · ADP sin conector |
 | `marketing` | Menús (exterior y completo), Platea, contenido, Seafood Tower | Menú exterior aprobado |
-| `reputacion` | Reviews de Google con la voz de la marca | Agente construido · falta instalar |
+| `reputacion` | Reviews de Google con la voz de la marca | ✅ Agente corriendo 6:00am en el Mac mini |
 
 ## Skills (`.claude/skills/`)
 `reporte-diario` · `clasificar-ostras` · `inventario-whatsapp` · `responder-reviews` ·

@@ -19,3 +19,4 @@
 - Nuevos `conocimiento/personal/guest-recognition.md` y `propinas.md`.
 - Ostras: proveedores Pangea y Red's Best; FIFO y one-pager de shuckers en pendientes.
 - Guest Recognition y propinas completados con las decisiones de los chats del 17 nov (tarifas por tier, pools y CreciPay).
+- Agente de reviews instalado en el Mac mini (`~/orquestador-oyster-shack/agentes/reviews-google`), launchd activo y probado. La Air queda solo para pruebas, sin launchd.
