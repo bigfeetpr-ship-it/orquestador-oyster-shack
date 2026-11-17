@@ -73,3 +73,7 @@ salidas/*
 !salidas/.gitkeep
 fuentes/whatsapp/*
 !fuentes/whatsapp/.gitkeep
+
+# La plantilla sin valores sí va
+!.env.example
+!**/.env.example
