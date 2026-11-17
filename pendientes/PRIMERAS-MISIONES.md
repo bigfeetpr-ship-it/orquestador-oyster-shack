@@ -27,7 +27,7 @@ Orden recomendado: lo que ya está casi listo primero. No diseñar más jerarqu�
 - [ ] ADP: definir el export semanal.
 
 - [ ] Guest Recognition: actualizar documento maestro y después el one-pager (tiers, bonos, sin tope).
-- [ ] One-pagers de propinas: CreciPay, Tip Distribution y FAQ.
+- [x] One-pagers de propinas: CreciPay, Tip Distribution y FAQ (17 nov). Confirmar si los % se calculan sobre la propina total.
 
 ## Marketing
 - [ ] Platea: 1 publicación + 1 email blast con foco en el Seafood Tower.
