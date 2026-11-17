@@ -1,0 +1,75 @@
+# --- Config local de Claude Code (no compartir) ---
+.claude/settings.local.json
+.claude/launch.json
+
+# --- Sistema operativo ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Secretos y credenciales (NUNCA subir) ---
+.env
+.env.*
+*.env
+*.key
+*.pem
+*.p12
+credentials.json
+secrets.json
+*.secret
+
+# --- Dependencias / build ---
+node_modules/
+dist/
+build/
+.cache/
+
+# --- Logs y temporales ---
+*.log
+*.tmp
+tmp/
+.tmp/
+
+# --- Cloudflare / infra local ---
+.wrangler/
+
+# --- Datos personales de clientes (NUNCA subir): transcripciones de llamadas ---
+cerebros/*/fuentes/llamadas/
+
+# --- Método propietario del fundador: transcripciones de formación quedan locales (solo entra el LEEME) ---
+cerebros/*/fuentes/contenido/*
+!cerebros/*/fuentes/contenido/LEEME.md
+
+# --- No-núcleo: salidas producidas y tableros por marca ---
+salidas/
+dashboard.html
+cockpit-*.html
+showcase/
+
+# --- Respaldos con data (la carpeta existe; su contenido queda local) ---
+activos/respaldos/*
+!activos/respaldos/.gitkeep
+
+# --- Fuentes en la raíz (esta copia usa fuentes/ en la raíz, no dentro de cerebros/) ---
+# Llamadas de clientes, exports personales de ChatGPT/Claude y clases: solo locales
+fuentes/llamadas/*
+!fuentes/llamadas/.gitkeep
+fuentes/conversaciones/*
+!fuentes/conversaciones/.gitkeep
+fuentes/contenido/*
+!fuentes/contenido/LEEME.md
+
+# --- Respuestas crudas del cuestionario y materiales del cliente: solo locales ---
+fuentes/materiales/*
+!fuentes/materiales/.gitkeep
+
+# --- Agente de reviews: estado, historial y salidas locales ---
+agentes/*/state.json
+agentes/*/history.jsonl
+agentes/*/preview.html
+venv/
+__pycache__/
+salidas/*
+!salidas/.gitkeep
+fuentes/whatsapp/*
+!fuentes/whatsapp/.gitkeep

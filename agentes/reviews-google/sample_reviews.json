@@ -1,0 +1,5 @@
+[
+  {"review_id": "t1", "user": {"name": "Cora Sawyer"}, "rating": 5, "date": "hace 5 horas", "iso_date": "2026-11-17T02:00:00Z", "snippet": "Yaf was amazing!", "link": "https://maps.google.com"},
+  {"review_id": "t2", "user": {"name": "Luis Ortiz"}, "rating": 2, "date": "hace 10 horas", "iso_date": "2026-11-16T22:00:00Z", "snippet": "Esperamos más de 40 minutos por la comida y nadie nos explicó nada. Las ostras estaban buenas pero el servicio dejó mucho que desear."},
+  {"review_id": "t3", "user": {"name": "therobable1"}, "rating": 4, "date": "hace 1 día", "iso_date": "2026-11-16T15:00:00Z", "snippet": ""}
+]
