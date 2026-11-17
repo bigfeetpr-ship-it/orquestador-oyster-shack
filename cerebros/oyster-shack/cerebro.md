@@ -33,6 +33,7 @@
 - East Coast y Premium: 1, 6 o 12 ostras (1 o 6 = una variedad; 12 = hasta dos variedades). Todas las opciones bajo un solo botón "Oysters".
 - Precios sueltas en Clover (nov 2026): East Coast $4 · Premium $4.50 · Unique $4.75. Half/Dozen: East Coast $22/$38 · Premium $26/$46.
 - Disponibilidad: se actualiza desde una **foto del pizarrón del raw bar**; lo que ya no está, se pone en 86.
+- Proveedores de ostras: **Pangea** y **Red's Best**. En preparación: protocolo FIFO de ostras y one-pager imprimible para shuckers.
 
 ## 3. Menú (lo que más vende, 1 ago–3 nov 2026)
 Ventas de menú $415,745 (comida $304,017 · bebida $111,728), 4,396 órdenes. Detalle en `data/` y `conocimiento/menu-engineering/`.
@@ -49,6 +50,8 @@ Ventas de menú $415,745 (comida $304,017 · bebida $111,728), 4,396 órdenes. D
 - Facturas: se quiere que cocina suba facturas de compra al recibir pedidos `[FALTA: flujo]`.
 - Compra fija de los lunes en Sam's: cherries, centerpull paper, galón de alcohol, blueberries, bolsas negras Power Flex 33.
 - Labor (ago–nov 2026): staffing de cena casi plano todos los días aunque la demanda no lo es; detalle en `conocimiento/labor/`.
+- Propinas: política en `conocimiento/personal/propinas.md` (TipHaus + CreciPay).
+- Programa de incentivos por reviews para empleados: `conocimiento/personal/guest-recognition.md`.
 - Contraseñas compartidas: migrando de una Google Sheet en Dropbox a 1Password.
 
 ## 5. Herramientas internas ya hechas

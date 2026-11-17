@@ -12,3 +12,9 @@
 - `agentes/reviews-google/examples.md`: 96 respuestas publicadas → patrones, ejemplos por tipo y 4 respuestas que NO se imitan.
 - Resuelto desde el historial: canal de quejas = info@theoystershackpr.com; dueño = Jaime.
 - System prompt: canal de quejas, Jaime, no citar precios ni "free valet"; revisión para reviews sospechosas y cobros.
+
+## 2026-11-17 · sincronización de la tarde
+- Reporte diario: 4ª sección de cierre de caja con la herramienta nueva `daily_closeout` (skill y tarea programada al día).
+- Nuevo `conocimiento/clover/margaritas-modificadores.md` (plan en stand by).
+- Nuevos `conocimiento/personal/guest-recognition.md` y `propinas.md`.
+- Ostras: proveedores Pangea y Red's Best; FIFO y one-pager de shuckers en pendientes.

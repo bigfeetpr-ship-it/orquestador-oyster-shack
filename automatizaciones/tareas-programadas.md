@@ -11,7 +11,7 @@ Si cambias un prompt aquí, actualiza también la tarea programada (y viceversa)
 ---
 
 ## Reporte diario Oyster Shack · 7:32am
-Prompt: idéntico a `.claude/skills/reporte-diario/SKILL.md`.
+Prompt: idéntico a `.claude/skills/reporte-diario/SKILL.md` (4 secciones desde el 17 nov: abiertas, ventas, top platos, cierre).
 Conectores: OYSTER_SHACK_CLOVER, Gmail. Entrega: email a info@theoystershackpr.com + mensaje + notificación.
 
 ---

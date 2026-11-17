@@ -16,12 +16,18 @@ Orden recomendado: lo que ya está casi listo primero. No diseñar más jerarqu�
 - [ ] Recipe Hub: reemplazar en Dropbox la versión nueva entregada el 16 nov; recetas faltantes (Snow Crab, Arroz Mariscos, Prawns, mofongos, Whole Snapper…); corregir precios del índice.
 - [ ] Limpieza de Clover por categoría (empezar por Hot Plates); todas las ostras bajo "Oysters".
 - [ ] Award-Winning Oysters: App $24 vs normal $23 en Clover, unificar.
+- [ ] **Margaritas en Clover** (stand by): montar bordes, tequila, sabor Premium y HOLD según `conocimiento/clover/margaritas-modificadores.md`, con confirmación de Joseph; después enviar el mensaje al staff y a Jaime.
+- [ ] Ostras: protocolo FIFO (Pangea + Red's Best) y one-pager imprimible para shuckers.
+- [x] Reporte diario con cierre de caja (`daily_closeout`) desde el 17 nov.
 
 ## Personal
 - [ ] Training Hub: Server Ops Manual (11 MB) y Shucker Ops Manual (35 MB) — PDF sin fotos o acceso local.
 - [ ] Videos de training, empezando por Host Operations Manual.
 - [ ] Labor: revisar cena plana Lun–Mié, solape de cambio de turno a las 17:00 y cierre Lun–Jue; aclarar clock-ins faltantes en TipHaus.
 - [ ] ADP: definir el export semanal.
+
+- [ ] Guest Recognition: actualizar documento maestro y después el one-pager (tiers, bonos, sin tope).
+- [ ] One-pagers de propinas: CreciPay, Tip Distribution y FAQ.
 
 ## Marketing
 - [ ] Platea: 1 publicación + 1 email blast con foco en el Seafood Tower.

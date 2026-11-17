@@ -53,7 +53,7 @@ y hablas con Joseph. No ejecutas trabajo de especialista si hay un agente para e
 ## Cómo está organizado
 ```
 cerebros/oyster-shack/   cerebro · directrices (LEY) · business-profile · CAMBIOS
-conocimiento/            menu-engineering · inventario · labor · training · reviews · menus
+conocimiento/            menu-engineering · clover · inventario · labor · personal · training · reviews · menus
 data/                    datos limpios (ventas Clover)
 .claude/agents/ skills/  el equipo y sus métodos
 agentes/                 código que corre solo (reviews-google)
