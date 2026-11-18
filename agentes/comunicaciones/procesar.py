@@ -42,7 +42,7 @@ TOOL = {
                 "items": {
                     "type": "object",
                     "properties": {
-                        "tipo": {"type": "string", "enum": ["dia_libre", "cambio_turno", "ponche", "reporte_diario", "otro"]},
+                        "tipo": {"type": "string", "enum": ["dia_libre", "cambio_turno", "ponche", "reporte_diario", "disponibilidad", "otro"]},
                         "empleado_texto": {"type": "string", "description": "Nombre del empleado tal como aparece (quien pide o a quien afecta). Vacío si no se sabe."},
                         "fecha_inicio": {"type": "string", "description": "AAAA-MM-DD. Día libre: primer día. Cambio de turno: el día del turno."},
                         "fecha_fin": {"type": "string", "description": "AAAA-MM-DD. Día libre: último día (igual a fecha_inicio si es un solo día)."},
@@ -63,6 +63,21 @@ TOOL = {
                         "quejas": {"type": "array", "items": {"type": "string"}},
                         "equipos": {"type": "array", "items": {"type": "string"}, "description": "Equipos rotos o con problemas."},
                         "notas": {"type": "string"},
+                        "lote": {"type": "string", "description": "Disponibilidad: identificador del periodo, ej. 'festivos-2026' para la temporada Thanksgiving–Reyes que empieza en 2026."},
+                        "preferencia_general": {"type": "string", "enum": ["sin_preferencia", "no_disponible", "pendiente", ""],
+                                                "description": "Disponibilidad: cuando el empleado no da días concretos."},
+                        "restriccion": {"type": "string", "description": "Disponibilidad: limitación general, ej. 'solo turnos PM'."},
+                        "preferencias": {
+                            "type": "array",
+                            "description": "Disponibilidad: una entrada por festivo/día mencionado para este empleado.",
+                            "items": {"type": "object", "properties": {
+                                "festivo": {"type": "string"},
+                                "fecha": {"type": "string", "description": "AAAA-MM-DD"},
+                                "preferencia": {"type": "string", "enum": ["libre", "trabaja"]},
+                                "turno": {"type": "string", "enum": ["AM", "PM", "doble", ""]},
+                                "condicion": {"type": "string", "description": "ej. 'para tener Navidad libre'"},
+                            }, "required": ["festivo", "preferencia"]},
+                        },
                         "confianza": {"type": "number", "description": "0 a 1: qué tan seguro estás de la clasificación y los datos."},
                         "requiere_revision": {"type": "boolean"},
                         "razon_revision": {"type": "string"},
@@ -83,7 +98,10 @@ Tipos:
 - cambio_turno: cambia o cubre un turno con otra persona.
 - ponche: se le olvidó ponchar, ponchó mal o pide corregir horas en el sistema.
 - reporte_diario: el reporte del turno (cierre, ventas, incidencias, faltantes, quejas, equipos).
+- disponibilidad: preferencias o disponibilidad de uno o varios empleados para festivos u otro periodo (quién quiere libre, quién puede trabajar, quién falta por responder). Devuelve UN item por empleado, incluidos los "pendientes" (preferencia_general="pendiente", sin preferencias). "Sin preferencia" → preferencia_general="sin_preferencia". "Los festivos no están en su disponibilidad" → preferencia_general="no_disponible". "Puede únicamente PM" → restriccion. "24 AM para tener Navidad libre" → dos entradas: Nochebuena trabaja AM (condición: para tener Navidad libre) y Navidad libre (condición: si trabaja Nochebuena AM). Usa el mismo lote para todos los empleados del mensaje (reportado_por_texto = quien compartió la lista).
 - otro: cualquier otra cosa sobre empleados (llegará tarde, renuncia, uniforme, etc.).
+
+Calendario de festivos (temporada que empieza en el año de la FECHA DE HOY si estamos entre agosto y diciembre): Thanksgiving = cuarto jueves de noviembre; Nochebuena = 24 dic; Navidad = 25 dic; Despedida de año = 31 dic; Año Nuevo = 1 ene del año siguiente; Reyes = 6 ene del año siguiente. "El 24" = Nochebuena, "el 31" = Despedida, "el 1" en contexto de festivos = Año Nuevo.
 
 Reglas:
 - Usa la FECHA DE HOY para resolver fechas relativas ("mañana", "el viernes" = el próximo viernes). Si la fecha es ambigua, deja la mejor interpretación y marca requiere_revision=true con la razón.
@@ -134,18 +152,21 @@ def clasificar(texto, hoy):
 
 SOLICITUD_FIELDS = ["empleado_texto", "fecha_inicio", "fecha_fin", "turno", "cambio_con_texto", "ponche_fecha",
                     "ponche_entrada_correcta", "ponche_salida_correcta", "ponche_detalle", "motivo_categoria", "resumen"]
+DISPONIBILIDAD_FIELDS = ["lote", "empleado_texto", "reportado_por_texto", "restriccion", "preferencia_general", "preferencias"]
 REPORTE_FIELDS = ["fecha", "turno", "reportado_por_texto", "ventas_mencionadas", "incidencias", "faltantes",
                   "quejas", "equipos", "notas"]
 
 
 def payload(item, texto, enviado_por):
-    fields = REPORTE_FIELDS if item["tipo"] == "reporte_diario" else SOLICITUD_FIELDS
+    fields = {"reporte_diario": REPORTE_FIELDS, "disponibilidad": DISPONIBILIDAD_FIELDS}.get(item["tipo"], SOLICITUD_FIELDS)
     datos = {k: item[k] for k in fields if item.get(k) not in (None, "", [])}
     if item["tipo"] == "reporte_diario" and item.get("resumen"):
         datos["notas"] = (datos.get("notas", "") + ("\n" if datos.get("notas") else "") + item["resumen"]).strip()
-    if item.get("razon_revision"):
+    if item.get("razon_revision") and item["tipo"] != "disponibilidad":
         key = "notas" if item["tipo"] == "reporte_diario" else "resumen"
         datos[key] = (datos.get(key, "") + f" [revisar: {item['razon_revision']}]").strip()
+    if item["tipo"] == "disponibilidad":
+        datos["preferencias"] = [{k: v for k, v in p.items() if v not in ("", None)} for p in item.get("preferencias") or []]
     return {"tipo": item["tipo"], "datos": datos, "mensaje_original": texto.strip(), "enviado_por": enviado_por,
             "confianza": item.get("confianza"), "requiere_revision": bool(item.get("requiere_revision"))}
 
@@ -165,7 +186,27 @@ def enviar(body):
 
 
 ETIQUETA = {"dia_libre": "Día libre", "cambio_turno": "Cambio de turno", "ponche": "Ponche",
-            "reporte_diario": "Reporte diario", "otro": "Otro"}
+            "reporte_diario": "Reporte diario", "disponibilidad": "Disponibilidad", "otro": "Otro"}
+GENERAL = {"sin_preferencia": "sin preferencia", "no_disponible": "no disponible en festivos", "pendiente": "pendiente de responder"}
+
+
+def resumen_disponibilidad(r):
+    it = r["item"]
+    res = r["respuesta"]
+    emp = (res or {}).get("empleado") or it.get("empleado_texto") or "?"
+    prefs = it.get("preferencias") or []
+    if prefs:
+        partes = []
+        for p in prefs:
+            t = f" {p['turno']}" if p.get("turno") else ""
+            partes.append(f"{p['festivo']} {'libre' if p['preferencia'] == 'libre' else 'trabaja' + t}")
+        txt = ", ".join(partes)
+    else:
+        txt = GENERAL.get(it.get("preferencia_general"), "sin datos")
+    if it.get("restriccion"):
+        txt += f" ({it['restriccion']})"
+    icon = "❌" if res is not None and not res.get("ok") else ("⚠️" if it.get("requiere_revision") or (res or {}).get("requiere_revision") else "•")
+    return f"{icon} {emp}: {txt}"
 
 
 def fechas(i):
@@ -247,8 +288,21 @@ def main():
         return
     head = "📋 Registrado en el Staff Hub" if not a.dry_run else "📋 (prueba, no se guardó)"
     print(head)
+    disp = [r for r in resultados if r["item"]["tipo"] == "disponibilidad"]
     for r in resultados:
-        print(linea(r["item"], r["respuesta"]))
+        if r["item"]["tipo"] != "disponibilidad":
+            print(linea(r["item"], r["respuesta"]))
+    if disp:
+        lote = disp[0]["item"].get("lote") or ""
+        pend = [d["item"].get("empleado_texto") for d in disp if d["item"].get("preferencia_general") == "pendiente"]
+        resp = [d for d in disp if d["item"].get("preferencia_general") != "pendiente"]
+        print(f"📅 Disponibilidad {lote}: {len(resp)} respondieron" + (f" · pendientes: {', '.join(pend)}" if pend else ""))
+        for d in resp:
+            print(resumen_disponibilidad(d))
+        noreco = [(d["respuesta"] or {}).get("empleado") is None and d["respuesta"] is not None and d["item"].get("empleado_texto") for d in disp]
+        noreco = [n for n in noreco if n]
+        if noreco:
+            print("⚠️ No reconocidos (añadir en Empleados): " + ", ".join(noreco))
     if any(r["respuesta"] is not None and not r["respuesta"].get("ok") for r in resultados):
         sys.exit(1)
 
