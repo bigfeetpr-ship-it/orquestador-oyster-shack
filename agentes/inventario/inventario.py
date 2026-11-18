@@ -33,6 +33,8 @@ PROVEEDORES = {
     "SW": "Seaword", "DC": "DC Produce", "D": "Dockside", "JP": "Janes Pastry",
     "DN": "Doña Lola", "M": "Méndez", "R": "Reds", "B": "Ballester", "P": "Pangeas",
     "PE": "Pepín", "H": "Hidropónicos",
+    # variantes que se usan en el conteo (confirmadas por Joseph, 17 nov)
+    "DL": "Doña Lola", "J": "Janes Pastry",
 }
 UNIDADES = {
     "box": "box", "bix": "box", "boxes": "box", "caja": "box", "cajas": "box",

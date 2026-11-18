@@ -20,6 +20,7 @@ Producto — PROVEEDOR — (MÍNIMO) (PAR) — CONTEO [unidad] [notas] [🚨]
 ### Códigos de proveedor
 S Sam's · C Costco · A Amazon · DE Denarius · JS José Santiago · SW Seaword · DC DC Produce · D Dockside · JP Janes Pastry · DN Doña Lola · M Méndez · R Reds · B Ballester · P Pangeas · PE Pepín · H Hidropónicos.
 `S-C` o `DC-S` significa proveedor principal y alterno.
+Variantes que también se usan: `DL` = Doña Lola y `J` = Janes Pastry (confirmado 17 nov).
 
 ## 2. Cómo se clasifica cada producto
 | Estado | Regla |
@@ -35,7 +36,7 @@ S Sam's · C Costco · A Amazon · DE Denarius · JS José Santiago · SW Seawor
 
 ## 3. Lo que OpenClaw NO puede asumir (va a `log/…_revisar.csv`)
 1. Conteo vacío sin 🚨🚨🚨: no se asume 0. Hay que preguntarle a quien contó.
-2. Código de proveedor que no está en la leyenda (en esta prueba: `DL` en Mozzarella y `J` en Malanga chips).
+2. Código de proveedor que no está en la leyenda.
 3. Línea sin proveedor o con un solo número entre paréntesis (por ejemplo Queso mixto, Salt, Wasabi, Lobster tail, Esponja, Brillo verdes, Degreaser, Vinagre Arroz, Avocado).
 4. **Unidad del conteo distinta a la del par.** Ejemplos: Lobster roll (par 37, conteo "3 box") y Malanga chips (par 70, conteo "2 1/2 box"). Sin la unidad en el catálogo, el pedido sale inflado.
 5. Conteo mixto, como Leche de coco "7 de cartón, 6 de latas". Se suma, pero queda marcado.
@@ -52,5 +53,5 @@ Cada lunes en Sam's se compra: 1 cherries, 1 centerpull paper, 1 galón de alcoh
 ## 6. Pendiente de confirmar con Joseph
 - [x] Formato confirmado por Joseph (17 nov): **(mínimo) (par) — conteo**.
 - [ ] La unidad de cada producto: porción, box, bag, pack o unidad.
-- [ ] Los códigos `DL` y `J`.
+- [x] `DL` = Doña Lola, `J` = Janes Pastry (17 nov).
 - [x] Se pide **hasta el par** (confirmado 17 nov). Pendiente: si algún proveedor obliga a pedir por caja.

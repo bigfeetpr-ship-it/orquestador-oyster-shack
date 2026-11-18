@@ -9,7 +9,7 @@ Orden recomendado: lo que ya está casi listo primero. No diseñar más jerarqu�
 - [x] **Ejemplos reales de reviews**: `examples.md` armado con 96 respuestas publicadas (17 nov).
 - [ ] **Guía de voz**: se cortó en el Ejemplo 5; faltan ejemplos negativos y la sección 10. Resolver los [VERIFICAR] (canal de quejas, compensaciones, otros idiomas).
 - [x] Inventario: formato (mín)(par)—conteo y pedir hasta el par confirmados (17 nov). Procesador en `agentes/inventario/`.
-- [ ] Inventario: Juniorkilla procesa los conteos reenviados (instrucción puesta en OpenClaw). Falta: unidades por producto en `catalogo/productos.csv`, códigos `DL` y `J`.
+- [ ] Inventario: Juniorkilla procesa los conteos reenviados (instrucción puesta en OpenClaw). Falta: unidades por producto en `catalogo/productos.csv`.
 - [ ] **OpenClaw**: probar el puente con Dropbox en la oficina; activar los grupos de WhatsApp.
 
 ## Ventas y menú
