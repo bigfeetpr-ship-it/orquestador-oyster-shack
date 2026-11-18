@@ -83,3 +83,6 @@ agentes/*/menciones.csv
 
 # --- Inventario: conteos y pedidos (locales) ---
 agentes/inventario/registros/
+
+# --- Comunicaciones ---
+agentes/comunicaciones/.env
