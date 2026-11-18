@@ -14,9 +14,9 @@ Orden recomendado: lo que ya está casi listo primero. No diseñar más jerarqu�
 
 ## Comunicaciones de empleados (Shack Staff Hub)
 - [x] App en Lovable creada (17 nov) y clasificador `agentes/comunicaciones/procesar.py`.
-- [ ] Publicar la app, crear usuarios de gerencia y oficina, crear el secret `INGEST_TOKEN`.
-- [ ] `.env` en el Mac mini y regla de Juniorkilla para la oficina (comunicaciones además de inventario).
-- [ ] Probar con mensajes reales: día libre, cambio de turno, ponche y reporte diario.
+- [x] Publicada en https://oyster-shack-staff-hub.lovable.app, secret `INGEST_TOKEN`, `.env` en el Mac mini y regla de Juniorkilla para la oficina (17 nov).
+- [x] Tipo **disponibilidad** (festivos) con pantalla Festivos; probado con la lista real de Yafreidy y varias pruebas reales (17 nov).
+- [ ] **Lista completa de empleados** (sala, Oyster Bar, cocina, etc.) — 18 nov. Actualizar en los DOS sitios: `agentes/reviews-google/empleados.csv` (lo usan el clasificador y el conteo de reviews) y la tabla `empleados` del Hub (pantalla Empleados). Incluir alias/apodos y rol; `cuenta_programa` solo para quien entra al Guest Recognition.
 
 ## Ventas y menú
 - [ ] Completar ventas a 6 meses (el conector ya puede; correrlo por ventanas de ≤85 días, mejor como tarea de una noche).

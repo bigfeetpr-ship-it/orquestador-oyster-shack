@@ -29,7 +29,7 @@ y hablas con Joseph. No ejecutas trabajo de especialista si hay un agente para e
 |---|---|---|
 | `operaciones` | Inventario de WhatsApp, pedidos por proveedor, Trello, facturas, 86 de ostras desde el pizarrón | Procesador de inventario listo (reenviar a Juniorkilla) |
 | `ventas-menu` | Reporte diario de Clover, tiers de ostras, menu engineering, Recipe Hub, limpieza de Clover | ✅ Reporte diario corriendo 7:32am |
-| `personal` | Training Hub, labor vs mesas, TipHaus, ADP, SOPs, Shack Staff Hub (días libres, cambios, ponches, reportes) | Staff Hub creado, falta conectar · ADP sin conector |
+| `personal` | Training Hub, labor vs mesas, TipHaus, ADP, SOPs, Shack Staff Hub (días libres, cambios, ponches, reportes) | ✅ Staff Hub conectado (oficina → Juniorkilla → Hub) · ADP sin conector |
 | `marketing` | Menús (exterior y completo), Platea, contenido, Seafood Tower | Menú exterior aprobado |
 | `reputacion` | Reviews de Google con la voz de la marca | ✅ Agente corriendo 6:00am en el Mac mini |
 
