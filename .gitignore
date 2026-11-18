@@ -77,3 +77,6 @@ fuentes/whatsapp/*
 # La plantilla sin valores sí va
 !.env.example
 !**/.env.example
+
+# --- Registro de menciones del Guest Recognition (vive en el Mac mini) ---
+agentes/*/menciones.csv

@@ -1,6 +1,6 @@
 # Agente de Google Reviews · The Oyster Shack
 
-Todos los días a las 6:00am: trae los reviews nuevos de Google, redacta las respuestas con la voz de la marca y manda un email desde info@ a Joseph con:
+Todos los días a las 6:00am: trae los reviews nuevos de Google, redacta las respuestas con la voz de la marca, cuenta los empleados mencionados, manda un email desde info@ a Joseph y avisa por WhatsApp. El email trae:
 - 🚩 **REVISAR**: 1-2★, temas de salud/legal, acusaciones a empleados (trae borrador, pero míralo antes de publicar)
 - ✅ **LISTOS PARA PEGAR**: el resto
 
@@ -34,6 +34,28 @@ launchctl load ~/Library/LaunchAgents/com.oystershack.reviews.plist
 
 Si el Mac está dormido a las 6:00, launchd lo corre cuando despierte.
 
+## Menciones de empleados (Guest Recognition)
+
+Cada review nueva (contestada o no) pasa por Claude para detectar a qué empleados nombra y con qué tono.
+- Lista de empleados y apodos: `empleados.csv` (`cuenta_programa=no` para quien no participa, ej. el dueño).
+- Registro: `menciones.csv` (local, no va a git). Una línea por empleado mencionado.
+- **Solo cuentan menciones positivas** de empleados del programa. Nombres que no están en la lista salen como ❓ para añadirlos.
+- El email trae la sección **👏 GUEST RECOGNITION** con el conteo del mes y el estimado de pago (tarifa del tier × reviews + bono más alto). La gerencia verifica.
+
+```bash
+./venv/bin/python agent.py --backfill-mentions 2026-11   # cuenta lo que ya pasó en el mes
+./venv/bin/python agent.py --mentions-report             # conteo del mes en curso
+```
+
+## Aviso por WhatsApp (OpenClaw)
+
+Al terminar, manda un resumen corto por WhatsApp con `openclaw message send --channel whatsapp`.
+En `.env`: `WHATSAPP_TO` (tu número, +1787...) y `OPENCLAW_BIN` (salida de `which openclaw`). Probar:
+```bash
+./venv/bin/python agent.py --test-whatsapp
+```
+Si OpenClaw falla, el email sale igual y el error queda en `agent.log`.
+
 ## Ejemplos reales (recomendado)
 
 ```bash
@@ -53,5 +75,7 @@ Cuenta de Google de info@theoystershackpr.com → Seguridad → Verificación en
 | `system_prompt.md` | Reglas duras y criterios de 🚩 |
 | `voice_guide.md` | Enlace a `conocimiento/reviews/guia-voz.md` (edita allá) |
 | `examples.md` | (opcional) respuestas reales que quieres que imite |
+| `empleados.csv` | Empleados y apodos para contar menciones |
+| `menciones.csv` | Registro de menciones (local) |
 | `state.json` | Reviews ya procesados, para no repetir |
 | `agent.log` | Log de cada corrida |

@@ -34,8 +34,19 @@ Marca flag=true y explica en flag_reason (en español, una línea) si:
 
 Aunque marques flag=true, escribe igualmente el mejor borrador posible.
 
+# Empleados mencionados (para el Guest Recognition Program)
+
+Además de la respuesta, identifica a cada empleado que el cliente nombra en la reseña. Usa la LISTA DE EMPLEADOS que viene con la reseña:
+- Si el nombre (o un apodo o una mala ortografía obvia) corresponde a alguien de la lista, devuelve su "nombre" exacto de la lista.
+- Si el cliente nombra a alguien que no está en la lista, devuélvelo con nombre "?" para que la gerencia lo identifique.
+- "Our waiter", "the bartender" o "the staff" sin nombre NO cuentan.
+- tono: "positivo" si lo elogia, "negativo" si se queja de esa persona, "neutral" si solo lo menciona.
+- No cuentes al dueño como empleado aunque lo nombren (igual lo devuelves si aparece en la lista).
+
 # Formato de salida
 
 Devuelve SOLO un objeto JSON válido, sin texto antes ni después, sin ```:
 
-{"language": "en" | "es" | "other", "flag": true | false, "flag_reason": "texto o cadena vacía", "reply": "respuesta lista para pegar"}
+{"language": "en" | "es" | "other", "flag": true | false, "flag_reason": "texto o cadena vacía", "reply": "respuesta lista para pegar", "empleados": [{"nombre": "nombre exacto de la lista o ?", "como_lo_llamo": "cómo aparece en la reseña", "tono": "positivo" | "neutral" | "negativo"}]}
+
+Si no nombra a nadie, "empleados" es [].
