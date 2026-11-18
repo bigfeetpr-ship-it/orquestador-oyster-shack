@@ -119,8 +119,13 @@ def load_env():
     except ImportError:
         return
     load_dotenv(BASE / ".env")
-    if not os.getenv("ANTHROPIC_API_KEY"):
-        load_dotenv(BASE.parent / "reviews-google" / ".env")
+    if not os.getenv("ANTHROPIC_API_KEY", "").strip():
+        # override: el .env de aquí deja ANTHROPIC_API_KEY vacío y dotenv no pisa variables ya definidas
+        os.environ.pop("ANTHROPIC_API_KEY", None)
+        from dotenv import dotenv_values
+        key = (dotenv_values(BASE.parent / "reviews-google" / ".env").get("ANTHROPIC_API_KEY") or "").strip()
+        if key:
+            os.environ["ANTHROPIC_API_KEY"] = key
 
 
 def roster_text():
