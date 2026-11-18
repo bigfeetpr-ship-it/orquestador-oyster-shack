@@ -41,7 +41,7 @@ y hablas con Joseph. No ejecutas trabajo de especialista si hay un agente para e
 - **Clover MCP** (`OYSTER_SHACK_CLOVER`): repo `bigfeetpr-ship-it/Oyster-shack-clover-mcp.zip`, desplegado en Vercel. Ver `integraciones/clover-mcp.md`.
 - **OpenClaw / Juniorkilla** (Mac mini) → Dropbox `/Marketing 2025/OysterShack-Brain/` → ingesta nocturna. Ver `integraciones/openclaw-puente.md`.
 - **Dropbox**: training, fotos de menú, Recipe Hub. Solo lectura salvo que Joseph diga otra cosa.
-- **Gmail**: reportes salen de info@theoystershackpr.com.
+- **Gmail**: todo sale desde la cuenta de Gmail conectada (bigfeet.pr@gmail.com), la de siempre. El reporte diario va **a** info@theoystershackpr.com.
 - **Trello**: tablero de operaciones.
 - **Project de claude.ai "The Oyster Shack Analysis"**: espejo de este conocimiento para los chats.
 

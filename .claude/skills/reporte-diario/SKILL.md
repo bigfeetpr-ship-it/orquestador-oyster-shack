@@ -76,7 +76,7 @@ De search_orders, toda orden cuyo state NO sea "locked" ni "paid" (ej. "open").
 ## Entrega (las 3 vías)
 Primera línea del reporte: "Oyster Shack — [día de la semana, fecha de AYER]: $[ventas] en [N] órdenes ([Δ%] vs semana pasada)". Segunda línea: "Cash removido: $[total] (esperado $[cash esperado], diferencia $[dif])". Luego las secciones en el orden de arriba (Cierre y cash removido primero). Al final, en una línea, cualquier problema de datos.
 
-1. EMAIL (principal): el REPORTE COMPLETO (las 4 secciones) por Gmail a info@theoystershackpr.com. Asunto: "Reporte diario Oyster Shack — [día, fecha de AYER]". Cuerpo en texto plano legible.
+1. EMAIL (principal): el REPORTE COMPLETO (las 4 secciones) por Gmail, desde la cuenta conectada (bigfeet.pr@gmail.com, la de siempre), a info@theoystershackpr.com. Asunto: "Reporte diario Oyster Shack — [día, fecha de AYER]". Cuerpo en texto plano legible.
 2. SendUserMessage: el reporte completo en markdown (tablas cortas).
 3. PushNotification: el REPORTE COMPLETO dentro de <routine_summary>, empezando con la línea de titular.
 Si Gmail falla: "⚠️ No se pudo enviar el email a info@theoystershackpr.com" en la primera línea de la notificación, y entrega igual por las otras dos vías.

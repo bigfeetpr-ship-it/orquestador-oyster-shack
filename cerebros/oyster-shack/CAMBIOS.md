@@ -36,3 +36,5 @@
 - Cuadre: ≤ $1 = "Cuadra ✅"; > $1 = ⚠️; ventas en cash sin retiro = ⚠️; más de 6 aperturas sin venta = 🟡.
 - Skill `reporte-diario` y tarea programada de las 7:32am al día. Ejemplo 17 nov: esperado $589.94, removido $590.00 (Yafreidy, 10:44 PM, "Closeout"), dif. $0.06.
 - Pendiente: añadir Gmail a los conectores de la tarea programada.
+- Remitente: Joseph decidió que todo se envía desde la cuenta de Gmail conectada (bigfeet.pr@gmail.com), la de siempre; ya no desde info@. El reporte diario sigue llegando a info@theoystershackpr.com. (El agente de reviews del Mac mini sigue usando su SMTP propio.)
+- Test del reporte del 17 nov enviado con el formato nuevo.
