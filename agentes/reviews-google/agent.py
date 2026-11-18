@@ -330,24 +330,31 @@ def pay_for(count):
 
 
 def month_summary(month):
-    """Conteo por empleado del mes (solo menciones que cuentan) + pendientes de identificar."""
-    counts, unknown, other = {}, [], []
+    """Conteo por empleado del mes: positivas (las que pagan), neutrales y negativas.
+    Devuelve (tabla, sin_identificar, fuera_del_programa)."""
+    per, unknown, outside = {}, [], []
+    roster = {r["nombre"]: r for r in load_roster()}
     if MENTIONS_FILE.exists():
         with MENTIONS_FILE.open(newline="", encoding="utf-8") as f:
             for row in csv.DictReader(f):
                 if row["mes"] != month:
                     continue
-                if row["empleado"] == "?":
+                emp = row["empleado"]
+                if emp == "?":
                     unknown.append(row)
-                elif row["cuenta"] == "si":
-                    counts[row["empleado"]] = counts.get(row["empleado"], 0) + 1
-                else:
-                    other.append(row)
+                    continue
+                if emp in roster and not roster[emp]["cuenta_programa"]:
+                    outside.append(row)
+                    continue
+                c = per.setdefault(emp, {"positivo": 0, "neutral": 0, "negativo": 0})
+                c[row["tono"] if row["tono"] in c else "neutral"] += 1
     table = []
-    for emp, c in sorted(counts.items(), key=lambda x: -x[1]):
-        rate, bonus, total = pay_for(c)
-        table.append({"empleado": emp, "reviews": c, "tarifa": rate, "bono": bonus, "total": total})
-    return table, unknown, other
+    for emp, c in per.items():
+        rate, bonus, total = pay_for(c["positivo"])
+        table.append({"empleado": emp, "reviews": c["positivo"], "neutrales": c["neutral"], "negativas": c["negativo"],
+                      "tarifa": rate, "bono": bonus, "total": total})
+    table.sort(key=lambda t: (-t["reviews"], t["negativas"], t["empleado"]))
+    return table, unknown, outside
 
 
 # ---------------------------------------------------------------- reporte
@@ -410,7 +417,7 @@ def render_html(items, mention_items, run_date, month):
 
 
 def render_mentions_html(mention_items, month):
-    table, unknown, other = month_summary(month)
+    table, unknown, outside = month_summary(month)
     today = [(i["review"], m) for i in mention_items for m in i["mentions"]]
     if not today and not table and not unknown:
         return ""
@@ -420,21 +427,26 @@ def render_mentions_html(mention_items, month):
             " · ".join(f"{m['empleado'] if m['empleado'] != '?' else '¿' + m['como_lo_llamo'] + '?'} ({m['tono']}, {customer(r)} {int(r.get('rating') or 0)}★)"
                        for r, m in today)) + "</div>"
     if table:
+        td = "padding:4px 8px"
         rows = "".join(
-            f"<tr><td style='padding:4px 8px'>{html.escape(t['empleado'])}</td><td style='padding:4px 8px;text-align:center'>{t['reviews']}</td>"
-            f"<td style='padding:4px 8px;text-align:right'>${t['tarifa']:.2f}</td><td style='padding:4px 8px;text-align:right'>${t['bono']}</td>"
-            f"<td style='padding:4px 8px;text-align:right'><b>${t['total']:.2f}</b></td></tr>" for t in table)
+            f"<tr><td style='{td}'>{html.escape(t['empleado'])}</td>"
+            f"<td style='{td};text-align:center'><b>{t['reviews']}</b></td>"
+            f"<td style='{td};text-align:center;color:#888'>{t['neutrales']}</td>"
+            f"<td style='{td};text-align:center;color:{'#b42318' if t['negativas'] else '#888'}'>{'<b>' + str(t['negativas']) + '</b>' if t['negativas'] else 0}</td>"
+            f"<td style='{td};text-align:right'>${t['tarifa']:.2f}</td><td style='{td};text-align:right'>${t['bono']}</td>"
+            f"<td style='{td};text-align:right'><b>${t['total']:.2f}</b></td></tr>" for t in table)
         out += ("<table style='border-collapse:collapse;font-size:13px;border:1px solid #ddd'>"
-                "<tr style='background:#f0f4fa'><th style='padding:4px 8px;text-align:left'>Empleado</th><th style='padding:4px 8px'>Reviews</th>"
-                "<th style='padding:4px 8px'>Tarifa</th><th style='padding:4px 8px'>Bono</th><th style='padding:4px 8px'>Estimado</th></tr>"
+                f"<tr style='background:#f0f4fa'><th style='{td};text-align:left'>Empleado</th><th style='{td}'>👏 Positivas</th>"
+                f"<th style='{td}'>Neutrales</th><th style='{td}'>👎 Negativas</th>"
+                f"<th style='{td}'>Tarifa</th><th style='{td}'>Bono</th><th style='{td}'>Estimado</th></tr>"
                 f"{rows}</table>")
     if unknown:
         out += '<div style="font-size:13px;color:#b42318;margin-top:8px">❓ Nombres sin identificar (añadirlos a empleados.csv): ' + html.escape(
             ", ".join(sorted({u["como_lo_llamo"] for u in unknown}))) + "</div>"
-    if other:
-        out += f'<div style="font-size:12px;color:#888;margin-top:6px">No cuentan (tono neutral/negativo o fuera del programa): {len(other)}</div>'
-    out += ('<div style="font-size:11px;color:#888;margin-top:6px">Solo cuentan menciones positivas. Estimado según el programa '
-            '(tarifa del tier más alto × reviews del mes + bono más alto); pendiente de verificación de gerencia.</div>')
+    if outside:
+        out += f'<div style="font-size:12px;color:#888;margin-top:6px">Menciones de personas fuera del programa (ej. el dueño): {len(outside)}</div>'
+    out += ('<div style="font-size:11px;color:#888;margin-top:6px">El pago se estima solo con las positivas: tarifa del tier más alto × positivas del mes '
+            '+ bono más alto. Neutrales y negativas se registran pero no pagan. Pendiente de verificación de gerencia.</div>')
     return out
 
 
@@ -453,7 +465,7 @@ def render_text(items, mention_items, run_date, month):
     table, unknown, _ = month_summary(month)
     if table or unknown:
         lines += [f"GUEST RECOGNITION · {month}"]
-        lines += [f"- {t['empleado']}: {t['reviews']} reviews · ${t['total']:.2f} estimado" for t in table]
+        lines += [f"- {t['empleado']}: {t['reviews']} positivas · {t['neutrales']} neutrales · {t['negativas']} negativas · ${t['total']:.2f} estimado" for t in table]
         if unknown:
             lines.append("Sin identificar: " + ", ".join(sorted({u["como_lo_llamo"] for u in unknown})))
     return "\n".join(lines)
@@ -488,6 +500,13 @@ def whatsapp_message(items, mention_items, now):
                 counted[m["empleado"]] = counted.get(m["empleado"], 0) + 1
     if counted:
         lines.append("👏 " + ", ".join(f"{k} ×{v}" for k, v in counted.items()))
+    negatives = {}
+    for i in mention_items:
+        for m in i["mentions"]:
+            if m["tono"] == "negativo" and m["empleado"] != "?":
+                negatives[m["empleado"]] = negatives.get(m["empleado"], 0) + 1
+    if negatives:
+        lines.append("👎 " + ", ".join(f"{k} ×{v}" for k, v in negatives.items()))
     unknown = {m["como_lo_llamo"] for i in mention_items for m in i["mentions"] if m["empleado"] == "?"}
     if unknown:
         lines.append("❓ Sin identificar: " + ", ".join(sorted(unknown)))
@@ -562,16 +581,17 @@ def backfill_mentions(month):
 
 
 def print_mentions(month):
-    table, unknown, other = month_summary(month)
-    print(f"\nGuest Recognition · {month} (solo menciones positivas)")
+    table, unknown, outside = month_summary(month)
+    print(f"\nGuest Recognition · {month}")
     if not table:
-        print("  Sin menciones que cuenten.")
+        print("  Sin menciones de empleados.")
     for t in table:
-        print(f"  {t['empleado']:<26} {t['reviews']:>3} reviews · ${t['tarifa']:.2f} c/u + bono ${t['bono']} = ${t['total']:.2f}")
+        print(f"  {t['empleado']:<26} 👏 {t['reviews']:>2}  · {t['neutrales']:>2} neutrales  👎 {t['negativas']:>2}"
+              f"   ${t['tarifa']:.2f} c/u + bono ${t['bono']} = ${t['total']:.2f}")
     if unknown:
         print("  Sin identificar:", ", ".join(sorted({u['como_lo_llamo'] for u in unknown})))
-    if other:
-        print(f"  No cuentan (neutral/negativo/fuera del programa): {len(other)}")
+    if outside:
+        print(f"  Fuera del programa: {len(outside)}")
 
 
 def run(args):

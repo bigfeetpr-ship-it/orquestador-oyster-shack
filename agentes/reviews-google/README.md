@@ -39,7 +39,7 @@ Si el Mac está dormido a las 6:00, launchd lo corre cuando despierte.
 Cada review nueva (contestada o no) pasa por Claude para detectar a qué empleados nombra y con qué tono.
 - Lista de empleados y apodos: `empleados.csv` (`cuenta_programa=no` para quien no participa, ej. el dueño).
 - Registro: `menciones.csv` (local, no va a git). Una línea por empleado mencionado.
-- **Solo cuentan menciones positivas** de empleados del programa. Nombres que no están en la lista salen como ❓ para añadirlos.
+- **Pagan solo las positivas**; las neutrales y negativas se cuentan por empleado (👎 en el email y el WhatsApp) pero no pagan. Nombres que no están en la lista salen como ❓ para añadirlos.
 - El email trae la sección **👏 GUEST RECOGNITION** con el conteo del mes y el estimado de pago (tarifa del tier × reviews + bono más alto). La gerencia verifica.
 
 ```bash

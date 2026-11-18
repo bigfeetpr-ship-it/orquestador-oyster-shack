@@ -29,6 +29,7 @@ Fuente: chat "Documento en español y PDF" (17 nov 2026). Maestro: Dropbox `Oyst
 
 ## Conteo automático (desde el 17 nov 2026)
 El agente de reviews detecta empleados nombrados en cada review nueva y lleva `menciones.csv` en el Mac mini. El email diario trae el conteo del mes y el estimado por empleado; el WhatsApp dice quién fue mencionado.
-- Cuentan solo menciones **positivas** de empleados con `cuenta_programa=si` en `agentes/reviews-google/empleados.csv`.
+- **Pagan** solo las menciones **positivas** de empleados con `cuenta_programa=si` en `agentes/reviews-google/empleados.csv`.
+- **Neutrales y negativas también se contabilizan** por empleado (decisión de Joseph, 17 nov) en el email, el WhatsApp (👎) y `--mentions-report`, pero no pagan.
 - `[VERIFICAR]` con Joseph: si una review que nombra a 2 empleados cuenta para ambos (hoy: sí), si cuenta una mención positiva dentro de una review de 1–3★ (hoy: sí), y si el mes se cuenta por la fecha del review (hoy: sí).
 - La gerencia verifica antes de pagar; el estimado no es la nómina.
