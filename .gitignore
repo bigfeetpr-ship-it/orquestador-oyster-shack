@@ -80,3 +80,6 @@ fuentes/whatsapp/*
 
 # --- Registro de menciones del Guest Recognition (vive en el Mac mini) ---
 agentes/*/menciones.csv
+
+# --- Inventario: conteos y pedidos (locales) ---
+agentes/inventario/registros/

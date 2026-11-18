@@ -8,7 +8,8 @@ Orden recomendado: lo que ya está casi listo primero. No diseñar más jerarqu�
 - [ ] **Reviews → menciones y WhatsApp** (17 nov): en el Mac mini `git pull`, añadir `WHATSAPP_TO` y `OPENCLAW_BIN` al `.env`, `--test-whatsapp`, `--backfill-mentions 2026-11`. Confirmar la lista `empleados.csv` (apodos, quién participa).
 - [x] **Ejemplos reales de reviews**: `examples.md` armado con 96 respuestas publicadas (17 nov).
 - [ ] **Guía de voz**: se cortó en el Ejemplo 5; faltan ejemplos negativos y la sección 10. Resolver los [VERIFICAR] (canal de quejas, compensaciones, otros idiomas).
-- [ ] **Inventario v0.1**: confirmar con Joseph mínimo vs par, unidades por producto, códigos `DL` y `J`, y si se pide hasta el par o por caja.
+- [x] Inventario: formato (mín)(par)—conteo y pedir hasta el par confirmados (17 nov). Procesador en `agentes/inventario/`.
+- [ ] Inventario: Juniorkilla procesa los conteos reenviados (instrucción puesta en OpenClaw). Falta: unidades por producto en `catalogo/productos.csv`, códigos `DL` y `J`.
 - [ ] **OpenClaw**: probar el puente con Dropbox en la oficina; activar los grupos de WhatsApp.
 
 ## Ventas y menú

@@ -1,6 +1,6 @@
 # Reglas de inventario — The Oyster Shack (para OpenClaw)
 
-Versión de prueba v0.1, 16 nov 2026, construida sobre el conteo de Bryan (GRUPO 1–10).
+Versión v0.2, 17 nov 2026 (v0.1 del 16 nov sobre el conteo de Bryan, GRUPO 1–10). Se aplica con `agentes/inventario/inventario.py`.
 
 ## 1. Formato que llega
 El conteo llega como un solo mensaje de WhatsApp dividido en `GRUPO 1` … `GRUPO 10`. El nombre que sigue a `GRUPO 1` es quien hizo el conteo.
@@ -50,7 +50,7 @@ S Sam's · C Costco · A Amazon · DE Denarius · JS José Santiago · SW Seawor
 Cada lunes en Sam's se compra: 1 cherries, 1 centerpull paper, 1 galón de alcohol, 1 blueberries y bolsas negras Power Flex 33. Se añade al pedido de Sam's de los lunes sin importar el conteo.
 
 ## 6. Pendiente de confirmar con Joseph
-- [ ] ¿El primer número es el mínimo (punto de pedido)? Así lo interpreta esta versión.
+- [x] Formato confirmado por Joseph (17 nov): **(mínimo) (par) — conteo**.
 - [ ] La unidad de cada producto: porción, box, bag, pack o unidad.
 - [ ] Los códigos `DL` y `J`.
-- [ ] Si el pedido debe rellenar hasta el par o pedir en múltiplos de caja del proveedor.
+- [x] Se pide **hasta el par** (confirmado 17 nov). Pendiente: si algún proveedor obliga a pedir por caja.

@@ -5,7 +5,7 @@ description: Procesa el conteo de inventario que llega por WhatsApp (GRUPO 1–1
 
 # Inventario desde WhatsApp
 
-Método completo y casos especiales: `conocimiento/inventario/reglas.md` (v0.1). Resumen operativo:
+**Primero corre el procesador:** `python3 agentes/inventario/inventario.py <archivo>` (o `-` para stdin). Hace todo lo de abajo de forma determinista. Método completo: `conocimiento/inventario/reglas.md`. Resumen:
 
 1. **Parsear** cada línea: `Producto — PROVEEDOR — (MÍNIMO) (PAR) — CONTEO [unidad] [notas] [🚨]`. Quien contó = nombre después de `GRUPO 1`. Guarda `linea_original` en cada registro.
 2. **Clasificar**: agotado (0, o vacío con 🚨🚨🚨) · bajo_minimo (≤ mínimo) · bajo_par · ok (par a 1.5×par) · sobre_par (>1.5×par) · sin_datos.
