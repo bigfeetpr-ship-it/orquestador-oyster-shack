@@ -141,18 +141,26 @@ def clasificar(texto, hoy):
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     user = (f"FECHA DE HOY: {DIAS[hoy.weekday()]} {hoy:%Y-%m-%d}\n\nLISTA DE EMPLEADOS:\n{roster_text()}\n\n"
             f"MENSAJE REENVIADO POR LA OFICINA:\n<<<\n{texto.strip()}\n>>>")
-    msg = client.messages.create(
-        model=os.getenv("CLAUDE_MODEL", "claude-sonnet-5-5"),
-        max_tokens=2000,
-        system=SYSTEM,
-        tools=[TOOL],
-        tool_choice={"type": "tool", "name": "registrar_comunicacion"},
-        messages=[{"role": "user", "content": user}],
-    )
-    for b in msg.content:
-        if b.type == "tool_use":
-            return b.input.get("items", [])
-    return []
+    # Este modelo no acepta tool_choice forzado ("tool"/"any"): se usa "auto" y se pide la herramienta en el
+    # mensaje. Si no la llama, se reintenta una vez recordándoselo.
+    messages = [{"role": "user", "content": user + "\n\nRegistra el resultado llamando a la herramienta registrar_comunicacion. No respondas con texto."}]
+    for _ in range(2):
+        msg = client.messages.create(
+            model=os.getenv("CLAUDE_MODEL", "claude-sonnet-5-5"),
+            max_tokens=4000,
+            system=SYSTEM,
+            tools=[TOOL],
+            tool_choice={"type": "auto"},
+            messages=messages,
+        )
+        for b in msg.content:
+            if b.type == "tool_use" and b.name == "registrar_comunicacion":
+                return b.input.get("items", [])
+        messages = messages + [
+            {"role": "assistant", "content": msg.content},
+            {"role": "user", "content": "Falta la llamada a registrar_comunicacion. Llámala ahora con los items."},
+        ]
+    raise SystemExit("Claude no devolvió la clasificación; revisa el mensaje a mano.")
 
 
 SOLICITUD_FIELDS = ["empleado_texto", "fecha_inicio", "fecha_fin", "turno", "cambio_con_texto", "ponche_fecha",
