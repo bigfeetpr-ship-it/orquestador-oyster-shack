@@ -25,3 +25,4 @@
 - Agente de reviews: cuenta empleados mencionados para el Guest Recognition (`empleados.csv`, `menciones.csv`, sección 👏 en el email, `--backfill-mentions`, `--mentions-report`) y avisa por WhatsApp con OpenClaw (`openclaw message send --channel whatsapp`).
 - Inventario: procesador `agentes/inventario/inventario.py` (lista de compra por proveedor desde el conteo de WhatsApp), pensado para que Juniorkilla lo corra cuando Joseph le reenvía el conteo.
 - OpenClaw: número de la oficina aprobado para reenviar conteos de inventario (solo inventario); dueño corregido a Joseph.
+- Shack Staff Hub (Lovable) para centralizar días libres, cambios de turno, ponches y reportes diarios; clasificador `agentes/comunicaciones/procesar.py` que corre Juniorkilla.

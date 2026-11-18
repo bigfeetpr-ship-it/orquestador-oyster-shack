@@ -3,7 +3,7 @@
 La oficina le reenvía a Juniorkilla (OpenClaw) los mensajes de empleados. Juniorkilla corre este script, que:
 1. Clasifica con Claude: **día libre · cambio de turno · ponche · reporte diario · otro** (un mensaje puede traer varias cosas).
 2. Saca los datos: empleado (usando `../reviews-google/empleados.csv` para los apodos), fechas, turno, con quién cambia, horas correctas del ponche, y en los reportes: incidencias, faltantes, quejas y equipos.
-3. Lo manda al endpoint `ingesta` del **Shack Staff Hub** (app en Lovable).
+3. Lo manda al endpoint `/api/public/ingesta` del **Shack Staff Hub** (app en Lovable, proyecto `59087e06-2e8e-4725-8eed-e773995f77ca`), con el header `x-ingest-token`.
 4. Imprime la confirmación para contestar por WhatsApp:
 ```
 📋 Registrado en el Staff Hub
@@ -28,3 +28,10 @@ cp .env.example .env && open -e .env      # HUB_INGEST_URL y HUB_INGEST_TOKEN
 pbpaste | ../reviews-google/venv/bin/python procesar.py -
 ../reviews-google/venv/bin/python procesar.py mensaje.txt --json
 ```
+
+## Shack Staff Hub (Lovable)
+- Editor: https://lovable.dev/projects/59087e06-2e8e-4725-8eed-e773995f77ca
+- Pantallas: Bandeja (contadores, pestañas, filtros), detalle editable con Aprobar/Rechazar/Hecho (ponches: "Corregido en ADP"), reporte diario, empleados con historial, calendario de aprobados.
+- Login solo por invitación (registro apagado). Usuarios: Lovable → Cloud → Users → Add user.
+- Secret `INGEST_TOKEN` en Lovable → Project Settings → Secrets; el mismo valor va en `HUB_INGEST_TOKEN` del `.env`. Sin el secret, el endpoint rechaza todo (401).
+- Empleados: semilla igual a `../reviews-google/empleados.csv` + Bryan (Cocina). Si añades a alguien, hazlo en los dos lados.

@@ -12,6 +12,12 @@ Orden recomendado: lo que ya está casi listo primero. No diseñar más jerarqu�
 - [ ] Inventario: Juniorkilla procesa los conteos reenviados (instrucción puesta en OpenClaw). Falta: unidades por producto en `catalogo/productos.csv`.
 - [ ] **OpenClaw**: probar el puente con Dropbox en la oficina; activar los grupos de WhatsApp.
 
+## Comunicaciones de empleados (Shack Staff Hub)
+- [x] App en Lovable creada (17 nov) y clasificador `agentes/comunicaciones/procesar.py`.
+- [ ] Publicar la app, crear usuarios de gerencia y oficina, crear el secret `INGEST_TOKEN`.
+- [ ] `.env` en el Mac mini y regla de Juniorkilla para la oficina (comunicaciones además de inventario).
+- [ ] Probar con mensajes reales: día libre, cambio de turno, ponche y reporte diario.
+
 ## Ventas y menú
 - [ ] Completar ventas a 6 meses (el conector ya puede; correrlo por ventanas de ≤85 días, mejor como tarea de una noche).
 - [ ] Fase 2 de menu engineering: faltan recipe cost cards, costo por ostra, pour cost.
