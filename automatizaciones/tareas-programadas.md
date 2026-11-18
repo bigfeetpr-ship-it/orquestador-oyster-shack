@@ -11,8 +11,8 @@ Si cambias un prompt aquí, actualiza también la tarea programada (y viceversa)
 ---
 
 ## Reporte diario Oyster Shack · 7:32am
-Prompt: idéntico a `.claude/skills/reporte-diario/SKILL.md` (4 secciones desde el 17 nov: abiertas, ventas, top platos, cierre).
-Conectores: OYSTER_SHACK_CLOVER, Gmail. Entrega: email a info@theoystershackpr.com + mensaje + notificación.
+Prompt: idéntico a `.claude/skills/reporte-diario/SKILL.md` (desde el 18 nov: 1. cierre y cash removido · 2. abiertas · 3. ventas · 4. top platos; titular con línea de cash removido).
+Conectores: OYSTER_SHACK_CLOVER (`daily_closeout` + `cash_log`), Gmail. ⚠️ 18 nov: Gmail no aparece en los conectores de la tarea; hay que añadirlo para que salga el email. Entrega: email a info@theoystershackpr.com + mensaje + notificación.
 
 ---
 

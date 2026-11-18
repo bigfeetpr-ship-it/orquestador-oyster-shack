@@ -29,3 +29,10 @@
 
 ## 2026-11-18 · cash log
 - Conector Clover: nueva herramienta `cash_log` (cash removido/añadido, aperturas sin venta, conteos; empleado, hora y nota). Ver `integraciones/clover-mcp.md`.
+
+## 2026-11-18 · reporte diario con cash removido
+- Joseph pidió que el reporte diario siempre incluya el cash removido de la caja (`cash_log`) y que el cierre sea la sección #1.
+- Nuevo orden: 1. Cierre y cash removido (1a cash removido + cuadre de caja + aperturas sin venta; 1b close out) · 2. Órdenes abiertas · 3. Resumen de ventas · 4. Platos más vendidos. Segunda línea del titular: cash removido vs esperado.
+- Cuadre: ≤ $1 = "Cuadra ✅"; > $1 = ⚠️; ventas en cash sin retiro = ⚠️; más de 6 aperturas sin venta = 🟡.
+- Skill `reporte-diario` y tarea programada de las 7:32am al día. Ejemplo 17 nov: esperado $589.94, removido $590.00 (Yafreidy, 10:44 PM, "Closeout"), dif. $0.06.
+- Pendiente: añadir Gmail a los conectores de la tarea programada.

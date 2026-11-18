@@ -27,6 +27,8 @@ Orden recomendado: lo que ya está casi listo primero. No diseñar más jerarqu�
 - [ ] **Margaritas en Clover** (stand by): montar bordes, tequila, sabor Premium y HOLD según `conocimiento/clover/margaritas-modificadores.md`, con confirmación de Joseph; después enviar el mensaje al staff y a Jaime.
 - [ ] Ostras: protocolo FIFO (Pangea + Red's Best) y one-pager imprimible para shuckers.
 - [x] Reporte diario con cierre de caja (`daily_closeout`) desde el 17 nov.
+- [x] Reporte diario con cash removido (`cash_log`) y cierre como sección #1 desde el 18 nov.
+- [ ] Añadir Gmail a los conectores de la tarea "Reporte diario Oyster Shack" (sin él no sale el email).
 
 ## Personal
 - [ ] Training Hub: Server Ops Manual (11 MB) y Shucker Ops Manual (35 MB) — PDF sin fotos o acceso local.
