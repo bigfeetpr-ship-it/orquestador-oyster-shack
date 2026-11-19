@@ -35,6 +35,8 @@ PROVEEDORES = {
     "PE": "Pepín", "H": "Hidropónicos",
     # variantes que se usan en el conteo (confirmadas por Joseph, 17 nov)
     "DL": "Doña Lola", "J": "Janes Pastry",
+    # "L" = Lares, indicado en la leyenda del conteo de la oficina (19 nov)
+    "L": "Lares",
 }
 UNIDADES = {
     "box": "box", "bix": "box", "boxes": "box", "caja": "box", "cajas": "box",
