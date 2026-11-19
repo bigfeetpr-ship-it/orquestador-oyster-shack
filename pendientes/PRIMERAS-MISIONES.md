@@ -31,6 +31,7 @@ Orden recomendado: lo que ya está casi listo primero. No diseñar más jerarqu�
 - [ ] Añadir Gmail a los conectores de la tarea "Reporte diario Oyster Shack" (sin él no sale el email).
 
 ## Personal
+- [ ] Recipe & Training Manual nov 2026 (con fotos): subirlo a Dropbox (07 - Manuales y entrenamiento); tomar 8 fotos que faltan; cocina confirma cantidades de Crab Cakes, Stone Crab, Jonah Claws y Branzino y porciones vs Clover; meter las recetas del Hub del 16 nov. Ver `conocimiento/training/recipe-training-manual.md`.
 - [ ] Training Hub: Server Ops Manual (11 MB) y Shucker Ops Manual (35 MB) — PDF sin fotos o acceso local.
 - [ ] Videos de training, empezando por Host Operations Manual.
 - [ ] Labor: revisar cena plana Lun–Mié, solape de cambio de turno a las 17:00 y cierre Lun–Jue; aclarar clock-ins faltantes en TipHaus.

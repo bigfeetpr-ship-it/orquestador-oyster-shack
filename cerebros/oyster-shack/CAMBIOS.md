@@ -38,3 +38,8 @@
 - Pendiente: añadir Gmail a los conectores de la tarea programada.
 - Remitente: Joseph decidió que todo se envía desde la cuenta de Gmail conectada (bigfeet.pr@gmail.com), la de siempre; ya no desde info@. El reporte diario sigue llegando a info@theoystershackpr.com. (El agente de reviews del Mac mini sigue usando su SMTP propio.)
 - Test del reporte del 17 nov enviado con el formato nuevo.
+
+## 2026-11-19 · Recipe & Training Manual con fotos
+- Nueva versión del manual de recetas para staff (`OysterShack_TrainingManual_2026_Nov.pdf`, 47 págs): mismo formato de junio, foto de referencia del Recipe Hub en 33 de 41 recetas, precios de Clover del 19 nov, índice y referencia rápida rehecha.
+- 4 recetas nuevas (Crab Cakes, Stone Crab Claws, Jonah Crab Claws, Whole Branzino) con cantidades por confirmar con cocina.
+- Nuevo `conocimiento/training/recipe-training-manual.md` (estado y pendientes) y generador en `agentes/manual-recetas/`.
